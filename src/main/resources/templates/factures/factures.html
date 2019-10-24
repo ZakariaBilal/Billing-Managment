@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Factures</title>
+    <th:block th:include="fragments/general-blocks.html :: headerfiles"></th:block>
+    <th:block th:include="fragments/general-blocks.html :: datatables-css-link"></th:block>
+</head>
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <th:block th:include="fragments/general-blocks.html :: sidebar(activity='factures', page='factures')">
+        </th:block>
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <th:block th:include="fragments/general-blocks.html :: topbar"></th:block>
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">Factures</h1>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Code de Facture</th>
+                                            <th>Code de bulletin</th>
+
+                                            <th>Date Facture</th>
+                                            <th>Montant TVA</th>
+                                            <th>Montant HTC</th>
+                                            <th>Montant TTC</th>
+                                            <th>Operations</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Code de Facture</th>
+                                            <th>Code de bulletin</th>
+
+                                            <th>Date Facture</th>
+                                            <th>Montant TVA</th>
+                                            <th>Montant HTC</th>
+                                            <th>Montant TTC</th>
+                                            <th>Operations</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr th:each="facture : ${factures}">
+                                            <td th:text="${facture.codeFacture}">0</td>
+                                            <td th:text="${facture.bulletin.codeBulletin}">test</td>
+                                            <td th:text="${facture.dateFacture}">23.32</td>
+                                            <td th:text="${facture.montantTVA}">23.32</td>
+                                            <td th:text="${facture.montantHTC}">23.32</td>
+                                            <td th:text="${facture.montantTTC}">23.32</td>
+
+                                            <td>
+                                                <a th:href="@{|/factures/view/${facture.codeFacture}|}"><i
+                                                        class="fas fa-fw fa-eye"></i></a>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+            <th:block th:include="fragments/general-blocks.html :: footer"></th:block>
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+    <th:block th:include="fragments/general-blocks.html :: logout-modal"></th:block>
+    <th:block th:include="fragments/general-blocks.html :: js-scripts"></th:block>
+    <th:block th:include="fragments/general-blocks.html :: data-tables-script"></th:block>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>View Prestation</title>
+    <th:block th:include="fragments/general-blocks.html :: headerfiles"></th:block>
+    <th:block th:include="fragments/general-blocks.html :: datatables-css-link"></th:block>
+</head>
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <th:block th:include="fragments/general-blocks.html :: sidebar(activity='parametrages', page='prestations')">
+        </th:block>
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <th:block th:include="fragments/general-blocks.html :: topbar"></th:block>
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">View Prestation</h1>
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <div class="row align-items-center">
+                                <h6 class="m-0 font-weight-bold text-primary">Informations Prestation</h6>
+                            </div>
+                        </div>
+                        <div class="container mt-3">
+                            <table class="table">
+
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Code Prestation</th>
+                                        <td th:text="${prestation.codePrestation}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Libelle Prestation</th>
+                                        <td th:text="${prestation.libellePrestation}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">TVA</th>
+                                        <td th:text="${prestation.tva.tauxTva}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Type</th>
+                                        <td th:text="${prestation.type}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Penalite</th>
+                                        <td th:text="${prestation.penalite.libellePenalite}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Majoration feriee</th>
+                                        <td th:text="${prestation.majorationFeriee}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Majoration Horaire</th>
+                                        <td th:text="${prestation.majorationHoraire}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <label class="font-weight-bold text-primary mb-4" for="navires">Navires :</label>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Code Tranche</th>
+                                            <th>Min condition</th>
+                                            <th>Max Condition</th>
+                                            <th>Min jour</th>
+                                            <th>Max jour</th>
+                                            <th>Montant</th>
+                                            <th>Montant minimum</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Code Tranche</th>
+                                            <th>Min condition</th>
+                                            <th>Max Condition</th>
+                                            <th>Min jour</th>
+                                            <th>Max jour</th>
+                                            <th>Montant</th>
+                                            <th>Montant minimum</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr th:each="tranche : ${prestation.tranches}">
+                                            <td th:text="${tranche.codeTranche}">0</td>
+                                            <td th:text="${tranche.minCondition}">test</td>
+                                            <td th:text="${tranche.maxCondition}">23.32</td>
+                                            <td th:text="${tranche.minJour}">23.32</td>
+                                            <td th:text="${tranche.maxJour}">23.32</td>
+                                            <td th:text="${tranche.montant}">23.32</td>
+                                            <td th:text="${tranche.montantMinimum}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+            <th:block th:include="fragments/general-blocks.html :: footer"></th:block>
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+    <th:block th:include="fragments/general-blocks.html :: logout-modal"></th:block>
+    <th:block th:include="fragments/general-blocks.html :: js-scripts"></th:block>
+    <th:block th:include="fragments/general-blocks.html :: data-tables-script"></th:block>
+</body>
+
+</html>

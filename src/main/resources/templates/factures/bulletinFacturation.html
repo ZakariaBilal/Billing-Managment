@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Facturation</title>
+    <th:block
+      th:include="fragments/general-blocks.html :: headerfiles"
+    ></th:block>
+    <th:block
+      th:include="fragments/general-blocks.html :: datatables-css-link"
+    ></th:block>
+  </head>
+
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <th:block
+        th:include="fragments/general-blocks.html :: sidebar(fichiers)"
+      ></th:block>
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <th:block
+            th:include="fragments/general-blocks.html :: topbar"
+          ></th:block>
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <!-- Page Heading -->
+            <h1 class="h3 mb-4 text-gray-800">View Bulletin</h1>
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <div class="row align-items-center">
+                  <h6 class="m-0 font-weight-bold text-primary">
+                    Informations Bulletin
+                  </h6>
+                </div>
+              </div>
+              <div class="container mt-3">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <th scope="row">Code Bulletin</th>
+                      <td th:text="${facture.bulletin.codeBulletin}"></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Client</th>
+                      <td
+                        th:text="${facture.bulletin.client.codeClient}+'-'+${facture.bulletin.client.nomClient}"
+                      ></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Navire</th>
+                      <td
+                        th:text="${facture.bulletin.navire.codeNavire}+'-'+${facture.bulletin.navire.nomNavire}"
+                      ></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Port</th>
+                      <td th:text="${facture.bulletin.port.location}"></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Type Bulletin</th>
+                      <td
+                        th:text="${facture.bulletin.typeBulletin.intituleTypeBulletin}"
+                      ></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Date entree</th>
+                      <td th:text="${facture.bulletin.dateEntree}"></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Date sortie</th>
+                      <td th:text="${facture.bulletin.dateSortie}"></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Date Bulletin</th>
+                      <td th:text="${facture.bulletin.dateBulletin}"></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <label
+                  class="font-weight-bold text-primary mb-4"
+                  for="Commandes"
+                  >Commandes :</label
+                >
+                <div class="table-responsive">
+                  <table
+                    class="table table-bordered"
+                    id="dataTable"
+                    width="100%"
+                    cellspacing="0"
+                  >
+                    <thead>
+                      <tr>
+                        <th>Prestation</th>
+                        <th>Date Debut</th>
+                        <th>Date Fin</th>
+                        <th>quantite</th>
+                        <th>Reduction</th>
+                        <th>Montant HTC</th>
+                        <th>Montant TVA</th>
+                        <th>Montant TTC</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th>Prestation</th>
+                        <th>Date Debut</th>
+                        <th>Date Fin</th>
+                        <th>quantite</th>
+                        <th>Reduction</th>
+                        <th>Montant HTC</th>
+                        <th>Montant TVA</th>
+                        <th>Montant TTC</th>
+                      </tr>
+                    </tfoot>
+                    <tbody>
+                      <tr th:each="ligne : ${facture.ligneFactures}">
+                        <td
+                          th:text="${ligne.ligneBulletin.prestation.libellePrestation}"
+                        >
+                          0
+                        </td>
+                        <td th:text="${ligne.ligneBulletin.dateDebut}"></td>
+                        <td th:text="${ligne.ligneBulletin.dateFin}"></td>
+                        <td th:text="${ligne.ligneBulletin.quantite}">23.32</td>
+                        <td th:text="${ligne.ligneBulletin.reduction}">
+                          23.32
+                        </td>
+                        <td th:text="${ligne.montantHTC}"></td>
+                        <td th:text="${ligne.montantTVA}"></td>
+                        <td th:text="${ligne.montantTTC}"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="container col-lg-6 align-self-end">
+                <table class="table">
+                  <tr>
+                    <th>Montant Total TTC</th>
+                    <th th:text="${facture.montantTTC}"></th>
+                  </tr>
+                  <tr>
+                    <th>Montant Total TVA</th>
+                    <th th:text="${facture.montantTVA}"></th>
+                  </tr>
+                  <tr>
+                    <th>Montant Taxe Regionale</th>
+                    <th th:text="${facture.montantTaxeRegionale}"></th>
+                  </tr>
+                  <tr>
+                    <th>Montant Total HTC</th>
+                    <th th:text="${facture.montantHTC}"></th>
+                  </tr>
+                  <tr>
+                    <th colspan="2" class="align-items-center   ">
+                      <a
+                        class="btn btn-success"
+                        th:href="@{'/factures/facturer/'+${facture.bulletin.codeBulletin}}"
+                        >Valider Facture</a
+                      >
+                    </th>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+        <th:block
+          th:include="fragments/general-blocks.html :: footer"
+        ></th:block>
+      </div>
+      <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+    <th:block
+      th:include="fragments/general-blocks.html :: logout-modal"
+    ></th:block>
+    <th:block
+      th:include="fragments/general-blocks.html :: js-scripts"
+    ></th:block>
+    <th:block
+      th:include="fragments/general-blocks.html :: data-tables-script"
+    ></th:block>
+  </body>
+</html>

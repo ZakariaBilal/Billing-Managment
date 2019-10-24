@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>View Bulletin</title>
+</head>
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">View Bulletin</h1>
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <div class="row align-items-center">
+                                <h6 class="m-0 font-weight-bold text-primary">Informations Bulletin</h6>
+                            </div>
+                        </div>
+                        <div class="container mt-3">
+                            <table class="table">
+
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Code Bulletin</th>
+                                        <td th:text="${bulletin.codeBulletin}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Client</th>
+                                        <td th:text="${bulletin.client.nomClient}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Navire</th>
+                                        <td th:text="${bulletin.navire.nomNavire}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Type Bulletin</th>
+                                        <td th:text="${bulletin.typeBulletin.intituleTypeBulletin}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Date entree</th>
+                                        <td th:text="${bulletin.dateEntree}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Date sortie</th>
+                                        <td th:text="${bulletin.dateSortie}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Date Bulletin</th>
+                                        <td th:text="${bulletin.dateBulletin}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <label class="font-weight-bold text-primary mb-4" for="Commandes">Commandes :</label>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Prestation</th>
+                                            <th>Jrs-Hrs</th>
+                                            <th>Quantite</th>
+                                            <th>Reduction</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Prestation</th>
+                                            <th>Jrs-Hrs</th>
+                                            <th>Quantite</th>
+                                            <th>Reduction</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr th:each="ligne : ${bulletin.ligneBulletins}">
+                                            <td th:text="${ligne.prestation.libellePrestation}">0</td>
+                                            <td th:text="${ligne.jrs}">test</td>
+                                            <td th:text="${ligne.quantite}">23.32</td>
+                                            <td th:text="${ligne.reduction}">23.32</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+            <th:block th:include="fragments/general-blocks.html :: footer"></th:block>
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+
+</body>
+
+</html>

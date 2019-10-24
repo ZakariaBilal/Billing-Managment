@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Add Prestation</title>
+
+    <th:block
+      th:include="fragments/general-blocks.html :: headerfiles"
+    ></th:block>
+  </head>
+
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <th:block
+        th:include="fragments/general-blocks.html :: sidebar(activity='parametrages', page='prestations')"
+      >
+      </th:block>
+
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          <th:block
+            th:include="fragments/general-blocks.html :: topbar"
+          ></th:block>
+
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <!-- Page Heading -->
+            <h1 class="h3 ml-2 text-gray-800">Add Prestation</h1>
+            <div class="container col-lg-6">
+              <div>
+                <form
+                  class="text-center border border-light"
+                  th:action="@{/parametrages/prestations}"
+                  th:object="${prestation}"
+                  action="#!"
+                  method="POST"
+                  id="prestationForm"
+                >
+                  <input
+                    type="text"
+                    id="defaultContactFormEmail"
+                    th:field="*{libellePrestation}"
+                    class="form-control mb-4"
+                    placeholder="Libelle Prestation"
+                    required
+                  />
+
+                  <label for="TVA">TVA</label>
+                  <select
+                    th:field="*{tva}"
+                    id="codeTVA"
+                    class="form-control mb-4"
+                  >
+                    <option
+                      th:each="tva : ${tvas}"
+                      th:value="${tva.codeTva}"
+                      th:text="${tva.codeTva} +'- '+ ${tva.tauxTva} + '%'"
+                    >
+                    </option>
+                  </select>
+                  <label for="Penalite">Penalite</label>
+                  <select
+                    th:field="*{penalite}"
+                    id="penalite"
+                    class="form-control mb-4"
+                  >
+                    <option
+                      th:each="penalite : ${penalites}"
+                      th:value="${penalite.code}"
+                      th:text="${penalite.code} +'- '+ ${penalite.libellePenalite}"
+                    >
+                    </option>
+                  </select>
+
+                  <label for="type">type</label>
+                  <select
+                    th:field="*{type}"
+                    id="type"
+                    class="form-control mb-4"
+                  >
+                    <option value="quantite">Quantite</option>
+                    <option value="tjbTranche">Par tjb avec tranche</option>
+                    <option value="jourTranche">par jour avec tranche</option>
+                    <option value="heures">par heure</option>
+                    <option value="tjbJour"
+                      >par tjb et jour trache sur jour</option
+                    >
+                    <option value="quantiteTranche"
+                      >par quantite avec tranche</option
+                    >
+                    <option value="longueurNavire"
+                      >par tranches de longueur de Navire</option
+                    >
+                  </select>
+
+                  <label for="Port">Port</label>
+                  <select
+                    th:field="*{port}"
+                    id="port"
+                    class="form-control mb-4"
+                  >
+                    <option
+                      th:each="port : ${ports}"
+                      th:value="${port.id}"
+                      th:text="${port.id} +'- '+ ${port.location}"
+                    >
+                    </option>
+                  </select>
+
+                  <div class="row align-items-center mb-4">
+                    <div class="col my-1">
+                      <div class="custom-control custom-checkbox mr-sm-2">
+                        <input
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="MULField"
+                          th:field="*{majorationFeriee}"
+                          value="1"
+                        />
+                        <label class="custom-control-label" for="MULField"
+                          >majoration jour Feriee</label
+                        >
+                      </div>
+                    </div>
+                    <div class="col my-1">
+                      <div class="custom-control custom-checkbox mr-sm-2">
+                        <input
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="CFField"
+                          th:field="*{majorationHoraire}"
+                          value="1"
+                        />
+                        <label class="custom-control-label" for="CFField"
+                          >majoration Horaire</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <input
+                    type="hidden"
+                    id="defaultContactFormEmail"
+                    th:field="*{majorationFeriee}"
+                    class="form-control mb-4"
+                    value="0"
+                  />
+
+                  <input
+                    type="hidden"
+                    id="defaultContactFormEmail"
+                    th:field="*{majorationHoraire}"
+                    class="form-control mb-4"
+                    value="0"
+                  />
+
+                  <div id="tarifs"></div>
+
+                  <!-- Send button -->
+                  <input
+                    class="btn btn-info btn-block"
+                    type="submit"
+                    value="Ajouter Prestation"
+                  />
+                </form>
+                <!-- Default form contact -->
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+
+        <th:block
+          th:include="fragments/general-blocks.html :: footer"
+        ></th:block>
+      </div>
+      <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <th:block
+      th:include="fragments/general-blocks.html :: logout-modal"
+    ></th:block>
+
+    <th:block
+      th:include="fragments/general-blocks.html :: js-scripts"
+    ></th:block>
+    <script src="/js/prestations.js"></script>
+  </body>
+</html>

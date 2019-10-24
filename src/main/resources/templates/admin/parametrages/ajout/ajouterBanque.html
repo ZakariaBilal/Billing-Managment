@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Add Banque</title>
+
+    <th:block th:include="fragments/general-blocks.html :: headerfiles"></th:block>
+
+
+
+</head>
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <th:block th:include="fragments/general-blocks.html :: sidebar(activity='parametrages', page='banques')">
+        </th:block>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+                <th:block th:include="fragments/general-blocks.html :: topbar"></th:block>
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 ml-2 text-gray-800">Add Banque</h1>
+                    <div class="container col-lg-6">
+                        <div>
+                            <form class="text-center border border-light" th:action="@{/parametrages/banques}"
+                                th:object="${banque}" action="#!" method="POST">
+                                <input type="hidden" th:field="*{codeBanque}">
+                                <input type="text" id="defaultContactFormEmail" th:field="*{nomBanque}"
+                                    class="form-control mb-4" placeholder="Nom de la Banque" required>
+
+                                <!-- Send button -->
+                                <button class="btn btn-info btn-block" type="submit">Ajouter Banque</button>
+
+                            </form>
+                            <!-- Default form contact -->
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <th:block th:include="fragments/general-blocks.html :: footer"></th:block>
+
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+
+
+
+    <th:block th:include="fragments/general-blocks.html :: logout-modal"></th:block>
+
+
+    <th:block th:include="fragments/general-blocks.html :: js-scripts"></th:block>
+</body>
+
+</html>

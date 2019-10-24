@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>TVAs</title>
+    <th:block th:include="fragments/general-blocks.html :: headerfiles"></th:block>
+    <th:block th:include="fragments/general-blocks.html :: datatables-css-link"></th:block>
+</head>
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <th:block th:include="fragments/general-blocks.html :: sidebar(activity='parametrages', page='tvas')">
+        </th:block>
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <th:block th:include="fragments/general-blocks.html :: topbar"></th:block>
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">TVA</h1>
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                                </div>
+                                <div class="col">
+                                    <a href="/parametrages/tvas/add" th:href="@{/parametrages/tvas/add}"
+                                        class="btn btn-success btn-lg" role="button" aria-disabled="true">Ajouter une
+                                        TVA</a></div>
+                            </div>
+
+
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Code de la TVA</th>
+                                            <th>Taux de la TVA</th>
+                                            <th>Operations</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Code de la TVA</th>
+                                            <th>Taux de la TVA</th>
+                                            <th>Operations</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr th:each="tva : ${tvas}">
+                                            <td th:text="${tva.codeTva}">0</td>
+                                            <td th:text="${tva.tauxTva}">test</td>
+                                            <td>
+                                                <a th:href="@{|/parametrages/tvas/edit/${tva.codeTva}|}"
+                                                    class="text-success" title="edit"><i
+                                                        class="fas fa-fw fa-edit"></i></a>
+                                                <a class="text-danger"
+                                                    th:href="@{|/parametrages/tvas/delete/${tva.codeTva}|}"
+                                                    onClick="return confirm('do you really want to delete this item');"><i
+                                                        class="fas fa-fw fa-trash" title="delete"></i></td>
+                                            </a>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+            <th:block th:include="fragments/general-blocks.html :: footer"></th:block>
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+    <th:block th:include="fragments/general-blocks.html :: logout-modal"></th:block>
+    <th:block th:include="fragments/general-blocks.html :: js-scripts"></th:block>
+    <th:block th:include="fragments/general-blocks.html :: data-tables-script"></th:block>
+</body>
+
+</html>

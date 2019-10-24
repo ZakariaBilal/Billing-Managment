@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Add Bulletin</title>
+
+    <th:block th:include="fragments/general-blocks.html :: headerfiles"></th:block>
+
+
+
+</head>
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <th:block th:include="fragments/general-blocks.html :: sidebar(activity='bulletins', page='ajoutBulletin')">
+        </th:block>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+                <th:block th:include="fragments/general-blocks.html :: topbar"></th:block>
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 ml-2 text-gray-800">Add Bulletins</h1>
+                    <div class="container-fluid" id="bulletinAddContainer">
+
+                        <form class="text-center border border-light" th:action="@{/bulletins}" th:object="${bulletin}"
+                            action="#!" id="bulletinForm" method="POST">
+
+                            <div class="row">
+                                <div class="col mb-4">
+                                    <label for="client">Client</label>
+                                    <div class="input-group">
+                                        <input list="clients" id="clientInput" th:name="client" class="form-control "
+                                            placeholder="codeClient" required title="Code Client">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <span id="clientNameText"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col mb-4">
+                                    <label for="navire">Navire</label>
+                                    <div class="input-group">
+                                        <input list="navires" id="navireInput" th:name="navire" class="form-control "
+                                            placeholder="codeNavire" required title="Code Navire" disabled>
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <span id="navireNameText"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <datalist id="clients">
+                                <option th:each="client : ${clients}" th:value="${client.codeClient}"
+                                    th:id="'client'+${client.codeClient}" th:text="${client.nomClient}"></option>
+                            </datalist>
+
+                            <div id="navires-datalist">
+
+                            </div>
+                            <div class="row">
+
+                                <div class="col">
+                                    <label for="Date Entree">Date Entree</label>
+                                    <input type="date" id="dateEntreeInput" th:name="dateEntree"
+                                        class="form-control mb-4" placeholder="Date Entree" required
+                                        title="Date Entree"></div>
+                                <div class="col">
+                                    <label for="Date Entree">Date Sortie</label>
+                                    <input type="date" step="any" id="dateSortieInput" th:name="dateSortie"
+                                        class="form-control mb-4" placeholder="Date Sortie" required
+                                        title="Date Sortie"></div>
+                            </div>
+                            
+
+                            <th:block th:if="${global}">
+                                    <label for="Port">Port</label>
+                                <select
+                                th:field="*{port}"
+                                id="port"
+                                class="form-control mb-4"
+                              >
+                                <option
+                                  th:each="port : ${ports}"
+                                  th:value="${port.id}"
+                                  th:text="${port.id} +'- '+ ${port.location}"
+                                >
+                                </option>
+                              </select>
+                            </th:block>
+                            <th:block th:unless="${global}">
+                                    
+                                <input type="hidden"  th:field="*{port}">
+                            </th:block>
+
+                            <label for="TypeBulletin">Type Bulletin</label>
+                            <select th:name="typeBulletin" id=" codeTypeBulletin" class="form-control mb-4"
+                                title="Code Type Bulletin">
+                                <option th:each="type : ${typesBulletin}" th:value="${type.codeTypeBulletin}"
+                                    th:text="${type.codeTypeBulletin} +'- '+ ${type.intituleTypeBulletin}">
+                                </option>
+                            </select>
+
+                            <div id="ajouterPrestations">
+                                <div class="row">
+                                    <div class="col-3 mb-4">
+                                        <div class="input-group">
+                                            <input list="prestations" id="defaultContactFormName"
+                                                th:name="ligneBulletins[0].prestation" class="form-control prestation "
+                                                placeholder="Code Prestation" required title="Code Prestation"
+                                                numero="0">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    <span id="prestation0Text"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <datalist id="prestations">
+                                            <option th:each="prestation : ${prestations}"
+                                                th:value="${prestation.codePrestation}"
+                                                th:text="${prestation.libellePrestation}"
+                                                th:id="'prestation'+${prestation.codePrestation}"></option>
+                                        </datalist>
+                                    </div>
+
+                                    <div class="col-2">
+                                        <input type="number" id="defaultContactFormEmail"
+                                            th:name="ligneBulletins[0].quantite" class="form-control mb-4"
+                                            placeholder="quantite" title="Quantite" min="0">
+                                    </div>
+                                    <div class="col-3">
+                                        <input type="datetime-local" class="form-control"
+                                            th:name="ligneBulletins[0].dateDebut" title="   date Debut" required>
+                                    </div>
+                                    <div class="col-3">
+                                        <input type="datetime-local" class="form-control"
+                                            th:name="ligneBulletins[0].dateFin" title="date Fin" required>
+                                    </div>
+                                    <!-- <div class="col-2 mb-4">
+                                        <div class="input-group">
+                                            <input type="number" id="defaultContactFormEmail"
+                                                th:name="ligneBulletins[0].reduction" class="form-control "
+                                                placeholder="reduction" title="Reduction" min="0">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">%</div>
+                                            </div>
+
+                                        </div>
+
+                                    </div> -->
+
+
+                                </div>
+                            </div>
+                            <!-- prestation 1 -->
+
+                            <input class="btn btn-info mb-3 " type="button" value="Ajouter une Prestation"
+                                onClick="addInput('ajouterPrestations');" />
+
+
+                            <!-- Send button -->
+                            <input type="submit" value="Add Bulletin" class="btn btn-success btn-block col-6"></input>
+
+                        </form>
+                        <!-- Default form contact -->
+
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <th:block th:include="fragments/general-blocks.html :: footer"></th:block>
+
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+
+
+
+    <th:block th:include="fragments/general-blocks.html :: logout-modal"></th:block>
+
+
+    <th:block th:include="fragments/general-blocks.html :: js-scripts"></th:block>
+
+    <script src="/js/bulletin.js">
+
+    </script>
+</body>
+
+</html>

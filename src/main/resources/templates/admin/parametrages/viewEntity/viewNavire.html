@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>View Navire</title>
+    <th:block th:include="fragments/general-blocks.html :: headerfiles"></th:block>
+    <th:block th:include="fragments/general-blocks.html :: datatables-css-link"></th:block>
+</head>
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <th:block th:include="fragments/general-blocks.html :: sidebar(activity='parametrages', page='navires')">
+        </th:block>
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <th:block th:include="fragments/general-blocks.html :: topbar"></th:block>
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">View Navire</h1>
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <div class="row align-items-center">
+                                <h6 class="m-0 font-weight-bold text-primary">Informations Navire</h6>
+                            </div>
+                        </div>
+                        <div class="container mt-3">
+                            <table class="table">
+
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Code Navire</th>
+                                        <td th:text="${navire.codeNavire}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Nom Navire</th>
+                                        <td th:text="${navire.nomNavire}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Proprietaire</th>
+                                        <td th:text="${navire.client.nomClient}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Pavillon</th>
+                                        <td th:text="${navire.pavillon.libellePavillon}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Categorie Navire</th>
+                                        <td th:text="${navire.categorieNavire.libelleCategorieNavire}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Longeur Navire</th>
+                                        <td th:text="${navire.longueurNavire}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Jauge Brute</th>
+                                        <td th:text="${navire.jaugeBrute}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+            <th:block th:include="fragments/general-blocks.html :: footer"></th:block>
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+    <th:block th:include="fragments/general-blocks.html :: logout-modal"></th:block>
+    <th:block th:include="fragments/general-blocks.html :: js-scripts"></th:block>
+    <th:block th:include="fragments/general-blocks.html :: data-tables-script"></th:block>
+</body>
+
+</html>

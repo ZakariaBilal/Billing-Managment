@@ -1,0 +1,10 @@
+thymeleaf:
+xmlns:th="http://www.thymeleaf.org"
+
+
+spring form:
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
+
+
+spring security:
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security"

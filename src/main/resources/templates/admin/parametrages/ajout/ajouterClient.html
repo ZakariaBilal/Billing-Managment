@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Add client</title>
+
+    <th:block th:include="fragments/general-blocks.html :: headerfiles"></th:block>
+
+
+
+</head>
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <th:block th:include="fragments/general-blocks.html :: sidebar(activity='parametrages', page='clients')">
+        </th:block>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+                <th:block th:include="fragments/general-blocks.html :: topbar"></th:block>
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 ml-2 text-gray-800">Add client</h1>
+                    <div class="container col-lg-6">
+                        <div>
+                            <form class="text-center border border-light" th:action="@{/parametrages/clients}"
+                                th:object="${client}" action="#!" method="POST">
+
+                                <input type="hidden" th:field="*{codeClient}">
+
+                                <input type="text" id="defaultContactFormName" th:field="*{nomClient}"
+                                    class="form-control mb-4" placeholder="Nom Client" required>
+
+                                <input type="text" id="defaultContactFormEmail" th:field="*{adresse}"
+                                    class="form-control mb-4" placeholder="Adresse" required>
+
+                                <input type="text" id="defaultContactFormEmail" th:field="*{complementAdresse}"
+                                    class="form-control mb-4" placeholder="Complement d'adresse" required>
+
+                                <input type="number" step="any" id="defaultContactFormEmail" th:field="*{numeroPatente}"
+                                    class="form-control mb-4" placeholder="Numero Patente" min="0" required>
+
+                                <input type="text" id="defaultContactFormEmail" th:field="*{numeroTel}"
+                                    class="form-control mb-4" placeholder="Numero de Telephone" required>
+
+
+                                <input type="text" id="defaultContactFormEmail" th:field="*{ice}"
+                                    class="form-control mb-4" placeholder="ICE" required>
+
+                                <!-- Send button -->
+                                <button class="btn btn-info btn-block" type="submit">Send</button>
+
+                            </form>
+                            <!-- Default form contact -->
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <th:block th:include="fragments/general-blocks.html :: footer"></th:block>
+
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+
+
+
+    <th:block th:include="fragments/general-blocks.html :: logout-modal"></th:block>
+
+
+    <th:block th:include="fragments/general-blocks.html :: js-scripts"></th:block>
+</body>
+
+</html>
